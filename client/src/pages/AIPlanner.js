@@ -4,8 +4,8 @@ import API from "../services/api";
 function AIPlanner() {
   const [tasks, setTasks] = useState([]);
   const [suggestion, setSuggestion] = useState("");
-const [hours, setHours] = useState("");
-const [deadline, setDeadline] = useState("");
+//const [hours, setHours] = useState("");
+//const [deadline, setDeadline] = useState("");
 const [plan, setPlan] = useState("");
 const [loading, setLoading] = useState(false);
   useEffect(() => {

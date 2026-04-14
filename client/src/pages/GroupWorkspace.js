@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 import { useParams } from "react-router-dom";
-
+import { useEffect, useState, useCallback } from "react";
 function GroupWorkspace() {
   const { groupId } = useParams();
 
@@ -17,22 +17,22 @@ function GroupWorkspace() {
   const [message, setMessage] = useState("");
 
   // 📥 Fetch
-  const fetchTasks = async () => {
-    const res = await API.get(`/api/groups/task/${groupId}`);
-    setTasks(res.data);
-  };
+ const fetchTasks = useCallback(async () => {
+  const res = await API.get(`/api/groups/task/${groupId}`);
+  setTasks(res.data);
+}, [groupId]);
 
-  const fetchChat = async () => {
-    const res = await API.get(`/api/groups/chat/${groupId}`);
-    setChat(res.data);
-  };
+const fetchChat = useCallback(async () => {
+  const res = await API.get(`/api/groups/chat/${groupId}`);
+  setChat(res.data);
+}, [groupId]);
 
   useEffect(() => {
-    if (groupId) {
-      fetchTasks();
-      fetchChat();
-    }
-  }, [groupId]);
+  if (groupId) {
+    fetchTasks();
+    fetchChat();
+  }
+}, [groupId, fetchTasks, fetchChat]);
 
   // ➕ Add Task
   const addTask = async () => {

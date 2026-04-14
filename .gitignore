@@ -1,2 +1,19 @@
+# env files
 .env
 server/.env
+.env.*
+
+# dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# logs
+*.log
+
+# OS
+.DS_Store
+
+# build outputs
+client/build/
+server/dist/

@@ -13,7 +13,10 @@ const OpenAI = require("openai");
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-app.use(cors());
+app.use(cors({
+  origin: "https://smart-planner-beta.vercel.app",
+  credentials: true
+}));
 app.use(express.json());
 app.use("/api/ai", require("./routes/aiRoutes"));
 app.use("/api/ai-analytics", require("./routes/aiAnalyticsRoutes"));
@@ -299,6 +302,12 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(5000, () => {
-  console.log("Server running on port 5000");
+// server.listen(5000, () => {
+//   console.log("Server running on port 5000");
+// });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
